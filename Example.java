@@ -1,5 +1,6 @@
 import java.util.*;
-class Example{
+import java.io.IOException;
+class Example1{
     public static String [] sIdArr = {"S001","S002","S003"};
     public static String [] sNameArr = {"Asanka","Buddhika","Chamara"};
     public static double [] prfArr = {10.0,50.2,-1};
@@ -8,9 +9,7 @@ class Example{
     
     public static void main(String args[]){
       menu();
-    
     }
-    
 		public static void menu(){
         System.out.println(" ---------------------------------------------------------------");
         System.out.println("|             WELCOME TO MARKS MANAGEMANET SYSTEM      		|");
@@ -35,7 +34,7 @@ class Example{
             case 8: printStudentRanks(); break;
             case 9: bestPRF();break;
             case 10: bestDBMS();break;
-            case 11: printall();break;
+            
             }
         }
 		public static void addNewStudent(){    
@@ -68,10 +67,6 @@ class Example{
 					op=option.charAt(0);
 					break;}
                 }
-    
-        
-            
-        //~ r =input.nextInt();
             }
         addToPrfArr(-1);
         addToDbmsArr(-1);
@@ -80,13 +75,10 @@ class Example{
         menu();
         }
 		public static void addNewStudentWithMarks(){    
-
-	
         System.out.println(" ---------------------------------------------------------------");
         System.out.println("|          ADD NEW STUDENT WITH MARKS           		    |");
         System.out.println(" ---------------------------------------------------------------");
         Scanner input = new Scanner(System.in); //System.in is a standard input stream  
-        
         boolean duplicate = false;
         while(duplicate ==false){
 			System.out.print("Enter Student Number [Format Sxxx]: ");  
@@ -120,7 +112,6 @@ class Example{
                        prfMarks = input.nextDouble();  }
                             }
 			addToPrfArr(prfMarks);
-        
             valid=false;
             double dbmsMarks;
             System.out.print("Database Management Marks : ");
@@ -133,7 +124,6 @@ class Example{
                     dbmsMarks = input.nextDouble();  }
                 }
 			addToDbmsArr(dbmsMarks);
-        
   			Scanner user =new Scanner(System.in);
 			String op;
 			boolean loopBreak = true;			
@@ -150,10 +140,7 @@ class Example{
 						System.out.print("incorrect .....!\n");
 					}
 				}while(loopBreak);
-
-
-        System.out.print("\033[H\033[2J");  
-		System.out.flush();  
+        clearConsole(); 
         menu();
         }
 		public static void addMarks(){ // find student Id and index, add marks to index
@@ -165,7 +152,6 @@ class Example{
         System.out.print("Enter Student ID :");
         Scanner input = new Scanner (System.in);
         String sId = input.nextLine();
-       
         for (int i = 0; i < sIdArr.length; i++) {
 			if(sId.equals(sIdArr[i])){
 				index=i ;
@@ -173,7 +159,6 @@ class Example{
 			}
 			if(valid == false){
 				System.out.print("Student ID not Valid, please ");}
-			
 			}
 			int op = 1;
 			while(op==1){
@@ -185,7 +170,6 @@ class Example{
 			System.out.println("Enter DBMS Marks  :");
 			double dbmsMarks = input.nextDouble();
 			addToDbmsArr(index,dbmsMarks);
-			
 			Scanner user =new Scanner(System.in);
 			String opt;
 			boolean loopBreak = true;			
@@ -208,11 +192,11 @@ class Example{
         }
 		public static void updateStudentDetails(){
 		System.out.println(" ---------------------------------------------------------------");
-        System.out.println("|             UPDATE STUDENT DETAILS			     		|");
+        System.out.println("|             UPDATE STUDENT DETAILS			     	|");
         System.out.println(" ---------------------------------------------------------------"); 
 		boolean valid=false;
         while(valid==false){
-        System.out.println("Enter Student ID");
+        System.out.print("Enter Student ID");
         Scanner input = new Scanner (System.in);
         String sId = input.nextLine();
        
@@ -383,7 +367,6 @@ class Example{
 								}
 							}while(loopBreak);					
 					}
-				
 			menu();
 		}		
 		public static void printStudentDetails(){
@@ -395,7 +378,6 @@ class Example{
         System.out.print("Enter Student ID	:");
         Scanner input = new Scanner (System.in);
         String sId = input.nextLine();
-       
         for (int i = 0; i < sIdArr.length; i++) {
 			if(sId.equals(sIdArr[i])){
 				index=i ;
@@ -403,7 +385,6 @@ class Example{
 			}
 			if(valid == false){
 				System.out.print("Student ID not Valid, please ");}
-			
 			}
 			if(prfArr[index]==(-1)){
 			System.out.println("Marks yet to be added");
@@ -413,7 +394,6 @@ class Example{
 				do{
 					System.out.println("Do you want search again : [Y]/[N]");
 					input = user.nextLine();
-				
 					if(input.toUpperCase().equals("Y")){
 						printStudentDetails();
 						loopBreak = false;
@@ -424,12 +404,7 @@ class Example{
 						System.out.print("incorrect .....!\n");
 					}
 				}while(loopBreak);
-
-		
-					}
-		
-		
-		
+			}
 		System.out.println("Student ID	: "+sIdArr[index] + "	Student Name: "+sNameArr[index]);			
 		System.out.println("+------------------------------------------------------+");	
 		System.out.printf("| %-45s%-28s\n","SUBJECT","MARKS"+"	|");	
@@ -440,7 +415,6 @@ class Example{
 		System.out.printf("| %-45s%-28s\n","Aveg. Marks",(prfArr[index]+dbmsArr[index])/2+"	|");	
 		System.out.printf("| %-45s%-28s\n","Rank Marks"," "+"	|");	
 		System.out.println("+----------------------------------------------------------+");		
-		
 		String input;
 		boolean loopBreak = true;
 		Scanner user =new Scanner(System.in);
@@ -459,7 +433,6 @@ class Example{
 						System.out.print("incorrect .....!\n");
 					}
 				}while(loopBreak);
-		
         menu();
 	}
 		public static void printStudentRanks(){
@@ -504,8 +477,8 @@ class Example{
 								temp[i]=temp[i-1]; }
 								temp[index]=prfMarks;
 								prfArr=temp;
-				}else{ System.out.println("Index error");}
-		
+				}else{ System.out.println("Index error");
+						}
    }
         public static void addToDbmsArr(double dbmsMarks){
         double[] temp=new double[dbmsArr.length+1];
@@ -527,9 +500,7 @@ class Example{
 					temp[index]=dbmsMarks;
 					dbmsArr=temp;
 				}else{ System.out.println("Index error"); }
-	
 	}	
-			
         public static void bestPRF(){
             double max=prfArr[0];
             for(int i=1; i<prfArr.length; i++){
@@ -584,16 +555,28 @@ class Example{
                 }
              }
         }
-        System.out.println(Arrays.toString(temp));
-        System.out.println(Arrays.toString(sIdTemp));
-				
-			
-			}
-		public static void printall(){
-					System.out.printf("%-15s%-28s%-10s%-10s\n","STUDENT ID","STUDENT NAME","PRF MARKS","DBMS MARKS");
-				for (int i = 0; i < sIdArr.length; i++) {
-			System.out.printf("%-15s%-25s%10.2f%10.2f\n","|"+sIdArr[i]+"    |","|"+sNameArr[i],prfArr[i],dbmsArr[i]);}
-			menu();
+        int [] rankArr  = new int [sIdTemp.length];
+        for (int i = 0; i < sIdTemp.length; i++) {
+			rankArr[i] = sIdTemp.length-1-i;
+		}
+	
+		System.out.println("+-----------------------------------------+");	
+		System.out.printf("| %-15s%-15s%-18s\n","RANK","SUBJECT","MARKS"+"	  |");	
+		System.out.println("+-----------------------------------------+");
+	
+			for (int i = 0; i < sIdTemp.length; i++) {
+				System.out.printf("| %-15s%-15s%-18s\n" ,rankArr[rankArr.length-1-i],sIdTemp[i],temp[i]+"      |");
+					}
+		}
+		public static void clearConsole() {
+    try {
+        if (System.getProperty("os.name").contains("Windows")) {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        }
+        else {
+            System.out.print("\033\143");
+        }
+    } catch (IOException | InterruptedException ex) {}
 }
         
 }
